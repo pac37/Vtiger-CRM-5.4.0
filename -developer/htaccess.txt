@@ -1,0 +1,8 @@
+php_value max_execution_time 600
+php_flag display_errors On
+
+# E_WARNING & ~E_NOTICE & ~E_DEPRECATED
+php_value error_reporting 2 
+
+#php_value allow_call_time_pass_reference On - Unsupported in PHP 5.4 
+php_flag log_errors Off

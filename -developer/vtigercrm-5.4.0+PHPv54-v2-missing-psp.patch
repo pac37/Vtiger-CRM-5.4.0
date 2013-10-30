@@ -1,0 +1,47 @@
+diff -rupN origineel/modules/Mobile/third-party/qCal/qCal/Date.php nieuw/modules/Mobile/third-party/qCal/qCal/Date.php
+--- origineel/modules/Mobile/third-party/qCal/qCal/Date.php	2012-12-12 17:29:22.000000000 +0100
++++ nieuw/modules/Mobile/third-party/qCal/qCal/Date.php	2012-12-07 16:29:38.000000000 +0100
+@@ -583,8 +583,8 @@ class qCal_Date {
+ 	public static function gmgetdate($timestamp = null) {
+ 	
+ 		$k = array('seconds','minutes','hours','mday','wday','mon','year','yday','weekday','month',0);
+-		return(array_combine($k, split(":", gmdate('s:i:G:j:w:n:Y:z:l:F:U', is_null($timestamp) ? time() : $timestamp))));
++		return(array_combine($k, explode(":", gmdate('s:i:G:j:w:n:Y:z:l:F:U', is_null($timestamp) ? time() : $timestamp))));
+ 	
+ 	}
+ 
+-}
+\ Geen regeleindeteken (LF) aan einde van bestand
++}
+diff -rupN origineel/modules/Products/DetailView.php nieuw/modules/Products/DetailView.php
+--- origineel/modules/Products/DetailView.php	2012-12-12 17:29:25.000000000 +0100
++++ nieuw/modules/Products/DetailView.php	2012-12-12 15:44:35.000000000 +0100
+@@ -28,7 +28,8 @@ if($record != '') {
+ 	if($_SESSION['image_type_error'] != '')
+ 	{
+ 		echo '<font color="red">'.$_SESSION['image_type_error'].'</font>';
+-		session_unregister('image_type_error');
++		//session_unregister('image_type_error');
++		unset($_SESSION['image_type_error']);
+ 	}
+ 	$focus->id = $record;
+ 	$focus->retrieve_entity_info($record, $currentModule);
+@@ -132,4 +133,4 @@ $smarty->assign('DETAILVIEW_AJAX_EDIT',
+ 
+ $smarty->display("Inventory/InventoryDetailView.tpl");
+ 
+-?>
+\ Geen regeleindeteken (LF) aan einde van bestand
++?>
+diff -rupN origineel/modules/SMSNotifier/ext/providers/ClickATell.php nieuw/modules/SMSNotifier/ext/providers/ClickATell.php
+--- origineel/modules/SMSNotifier/ext/providers/ClickATell.php	2012-12-12 17:29:32.000000000 +0100
++++ nieuw/modules/SMSNotifier/ext/providers/ClickATell.php	2012-12-07 15:50:34.000000000 +0100
+@@ -73,7 +73,7 @@ class ClickATell implements ISMSProvider
+ 		$serviceURL = $this->getServiceURL(self::SERVICE_SEND);
+ 		$httpClient = new Vtiger_Net_Client($serviceURL);
+ 		$response = $httpClient->doPost($params);
+-		$responseLines = split("\n", $response);		
++		$responseLines = explode("\n", $response);		
+ 
+ 		$results = array();
+ 		$i=0;
