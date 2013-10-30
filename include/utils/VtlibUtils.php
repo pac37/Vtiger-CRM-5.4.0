@@ -539,6 +539,13 @@ $__htmlpurifier_instance = false;
 function vtlib_purify($input, $ignore=false) {
 	global $__htmlpurifier_instance, $root_directory, $default_charset;
 
+	static $purified_cache = array();
+	if(!is_array($input)) {
+		$md5OfInput = md5($input);
+		if (array_key_exists($md5OfInput, $purified_cache)) {
+			return $purified_cache[$md5OfInput];
+		}
+	}
 	$use_charset = $default_charset;
 	$use_root_directory = $root_directory;
 
@@ -566,6 +573,7 @@ function vtlib_purify($input, $ignore=false) {
 				}
 			} else { // Simple type
 				$value = $__htmlpurifier_instance->purify($input);
+				$purified_cache[$md5OfInput] = $value;
 			}
 		}
 	}
@@ -605,6 +613,20 @@ function vtlib_module_icon($modulename){
 		return "modules/$modulename/$modulename.png";
 	}
 	return "modules/Vtiger/Vtiger.png";
+}
+
+/**
+ * Function to return the valid SQl input.
+ * @param <String> $string
+ * @param <Boolean> $skipEmpty Skip the check if string is empty.
+ * @return <String> $string/false
+ */
+function vtlib_purifyForSql($string, $skipEmpty=true) {
+	$pattern = "/^[_a-zA-Z0-9.]+$/";
+	if ((empty($string) && $skipEmpty) || preg_match($pattern, $string)) {
+		return $string;
+	}
+	return false;
 }
 
 ?>

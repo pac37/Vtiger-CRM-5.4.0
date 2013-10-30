@@ -495,11 +495,13 @@ function return_module_language($language, $module)
 	{
 		$log->warn("Unable to find the module language file for language: ".$language." and module: ".$module);
 		if($default_language == 'en_us') {
+			checkFileAccessForInclusion("modules/$module/language/$default_language.lang.php");
 			require("modules/$module/language/$default_language.lang.php");
 			$language_used = $default_language;
 		} else {
 			@include("modules/$module/language/$default_language.lang.php");
 			if(!isset($mod_strings)) {
+				checkFileAccessForInclusion("modules/$module/language/en_us.lang.php");
 				require("modules/$module/language/en_us.lang.php");
 				$language_used = 'en_us';
 			} else {
@@ -1010,8 +1012,8 @@ function to_html($string, $encode=true)
 	global $log,$default_charset;
 	//$log->debug("Entering to_html(".$string.",".$encode.") method ...");
 	global $toHtml;
-	$action = $_REQUEST['action'];
-	$search = $_REQUEST['search'];
+	$action = vtlib_purify($_REQUEST['action']);
+	$search = vtlib_purify($_REQUEST['search']);
 
 	$doconvert = false;
 
@@ -4847,14 +4849,19 @@ function getTabInfo($tabId) {
  */
 function getBlockName($blockid) {
 	global $adb;
-	if(!empty($blockid)){
+	
+	$blockname = VTCacheUtils::lookupBlockLabelWithId($blockid);
+	
+	if(!empty($blockid) && $blockname === false){
 		$block_res = $adb->pquery('SELECT blocklabel FROM vtiger_blocks WHERE blockid = ?',array($blockid));
 		if($adb->num_rows($block_res)){
 			$blockname = $adb->query_result($block_res,0,'blocklabel');
-			return $blockname;
+		} else {
+			$blockname = '';
 		}
+		VTCacheUtils::updateBlockLabelWithId($blockname, $blockid);
 	}
-	return '';
+	return $blockname;
 }
 
 function validateAlphaNumericInput($string){

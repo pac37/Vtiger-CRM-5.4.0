@@ -94,10 +94,6 @@ function insert_charset_header()
 insert_charset_header();
 // Create or reestablish the current session
 session_start();
-$_SESSION['KCFINDER'] = array();
-$_SESSION['KCFINDER']['disabled'] = false;
-$_SESSION['KCFINDER']['uploadURL'] = "test/upload";
-$_SESSION['KCFINDER']['uploadDir'] = "../test/upload";
 
 if (!is_file('config.inc.php')) {
 	header("Location: install.php");
@@ -219,7 +215,7 @@ $is_module = false;
 $is_action = false;
 if(isset($_REQUEST['module']))
 {
-	$module = $_REQUEST['module'];	
+	$module = vtlib_purify($_REQUEST['module']);
 	$dir = @scandir($root_directory."modules");
 	$temp_arr = Array("CVS","Attic");
 	$res_arr = @array_intersect($dir,$temp_arr);
@@ -601,21 +597,24 @@ if($action == "DetailView")
 }	
 
 // set user, theme and language cookies so that login screen defaults to last values
+$siteURLParts = parse_url($site_URL); 
+$cookieDomain = $siteURLParts['host'];
 if (isset($_SESSION['authenticated_user_id'])) {
         $log->debug("setting cookie ck_login_id_vtiger to ".$_SESSION['authenticated_user_id']);
-        setcookie('ck_login_id_vtiger', $_SESSION['authenticated_user_id']);
+        setcookie('ck_login_id_vtiger', $_SESSION['authenticated_user_id'],0,null,$cookieDomain,false,true);
 }
 if (isset($_SESSION['vtiger_authenticated_user_theme'])) {
         $log->debug("setting cookie ck_login_theme_vtiger to ".$_SESSION['vtiger_authenticated_user_theme']);
-        setcookie('ck_login_theme_vtiger', $_SESSION['vtiger_authenticated_user_theme']);
+        setcookie('ck_login_theme_vtiger', $_SESSION['vtiger_authenticated_user_theme'],0,null,$cookieDomain,false,true);
 }
 if (isset($_SESSION['authenticated_user_language'])) {
         $log->debug("setting cookie ck_login_language_vtiger to ".$_SESSION['authenticated_user_language']);
-        setcookie('ck_login_language_vtiger', $_SESSION['authenticated_user_language']);
+        setcookie('ck_login_language_vtiger', $_SESSION['authenticated_user_language'],0,null,$cookieDomain,false,true);
 }
 
 if($_REQUEST['module'] == 'Documents' && $action == 'DownloadFile')
 {
+	checkFileAccess('modules/Documents/DownloadFile.php');
 	include('modules/Documents/DownloadFile.php');
 	exit;
 }

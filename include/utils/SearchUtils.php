@@ -933,7 +933,7 @@ function getSearchURL($input) {
 			$urlString .= "&operator=".vtlib_purify($input['operator']);
 		}
 	}
-	return $urlString;
+	return to_html($urlString);
 }
 
 /**This function is returns the where conditions for dashboard and shows the records when clicked on dashboard graph
