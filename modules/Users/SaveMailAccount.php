@@ -46,6 +46,7 @@ if(isset($_REQUEST['edit']) && $_REQUEST['edit'] && $_REQUEST['record']!='') {
 	$params = array($account_id, $current_user->id, $displayname, $email, $account_name, $mailprotocol, $server_username, $encrypted_password, $mail_servername, $box_refresh, $mails_per_page, $ssltype, $sslmeth, $_REQUEST["int_mailer"],'1','0');
 }
 
+//error_log("Jan; ok dit is de query:\n$sql\n\nDit zijn de params: ".implode($params)."\n\n");
 $adb->pquery($sql, $params);
 
 $return_module = vtlib_purify($_REQUEST['return_module']);

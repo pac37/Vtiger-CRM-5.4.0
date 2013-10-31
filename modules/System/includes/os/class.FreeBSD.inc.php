@@ -49,7 +49,7 @@ class sysinfo extends bsd_common {
 
   function network () {
     $netstat = execute_program('netstat', '-nibd | grep Link');
-    $lines = split("\n", $netstat);
+    $lines = explode("\n", $netstat);
     $results = array();
     for ($i = 0, $max = sizeof($lines); $i < $max; $i++) {
       $ar_buf = preg_split("/\s+/", $lines[$i]);

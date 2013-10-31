@@ -100,7 +100,6 @@ abstract class MailManager_Controller {
 				$this->mConnector = $draftController->connectorWithModel();
 			} else {
 				if ($this->mConnector) $this->mConnector->close();
-
 				$model = $this->getMailboxModel();
 				$this->mConnector = MailManager_Connector::connectorWithModel($model, $folder);
 			}

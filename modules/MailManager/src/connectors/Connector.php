@@ -56,18 +56,25 @@ class MailManager_Connector {
 	 * @returns MailManager_Connector Object
 	 */
 	static function connectorWithModel($model, $folder='') {
-		
 		$port = 143; // IMAP
 		if (strcasecmp($model->protocol(), 'pop') === 0) $port = 110; // NOT IMPLEMENTED
 		else if (strcasecmp($model->ssltype(), 'ssl') === 0) $port = 993; // IMAP SSL
-
 		$url = sprintf('{%s:%s/%s/%s/%s}%s', $model->server(), $port, $model->protocol(), 
 			$model->ssltype(), $model->certvalidate(), $folder);
 		$baseUrl = sprintf('{%s:%s/%s/%s/%s}', $model->server(), $port, $model->protocol(),
 			$model->ssltype(), $model->certvalidate());
-		return new self($url, $model->username(), $model->password(), $baseUrl);
-	}
+		
 
+		return new self($url, $model->username(), $model->password(), $baseUrl);
+	
+		
+			
+		//$objct = new MailManager_Connector($url, $model->username(), $model->password());//, $baseUrl);
+		//($url,$model->username(),$model->password(),$baseUrl);
+		//error_log('connwm 4');
+		//return $objct;
+		//return $this;
+	}
 	
 	/**
 	 * Opens up imap connection to the specified url

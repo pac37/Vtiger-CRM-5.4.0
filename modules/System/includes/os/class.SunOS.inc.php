@@ -25,7 +25,7 @@ class sysinfo {
   // Extract kernel values via kstat() interface
   function kstat ($key) {
     $m = execute_program('kstat', "-p d $key");
-    list($key, $value) = split("\t", trim($m), 2);
+    list($key, $value) = explode("\t", trim($m), 2);
     return $value;
   } 
 
@@ -65,7 +65,7 @@ class sysinfo {
   } 
 
   function users () {
-    $who = split('=', execute_program('who', '-q'));
+    $who = explode('=', execute_program('who', '-q'));
     $result = $who[1];
     return $result;
   } 
@@ -126,7 +126,7 @@ class sysinfo {
     $results = array();
 
     $netstat = execute_program('netstat', '-ni | awk \'(NF ==10){print;}\'');
-    $lines = split("\n", $netstat);
+    $lines = explode("\n", $netstat);
     $results = array();
     for ($i = 0, $max = sizeof($lines); $i < $max; $i++) {
       $ar_buf = preg_split("/\s+/", $lines[$i]);
@@ -197,14 +197,14 @@ class sysinfo {
 
   function filesystems () {
     $df = execute_program('df', '-k');
-    $mounts = split("\n", $df);
+    $mounts = explode("\n", $df);
 
     $dftypes = execute_program('df', '-n');
-    $mounttypes = split("\n", $dftypes);
+    $mounttypes = explode("\n", $dftypes);
 
     for ($i = 1, $j = 0, $max = sizeof($mounts); $i < $max; $i++) {
       $ar_buf = preg_split('/\s+/', $mounts[$i], 6);
-      $ty_buf = split(':', $mounttypes[$i-1], 2);
+      $ty_buf = explode(':', $mounttypes[$i-1], 2);
 
       if (hide_mount($ar_buf[5])) {
         continue;
