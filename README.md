@@ -24,6 +24,13 @@ An Italian Language pack
 
 `vtiger540_italian_language_pack_02-08-2012.zip`
 
+A bash script to change the owner of specified files and directory: by default the owner is root:root but this as to be changed into www-data:www-data to allowing Apache to write them.
+
+- `make-writable.sh <base path>` apply the changes considering <base path> as Vtiger install folder
+- `make-writable.conf` contains the files and directories to be changed, one per line (directories don't have trailng slashes)
+
+note: non existent files or directory cause the script to stop: they have to be created manually.
+
 Links
 -----
 
