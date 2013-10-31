@@ -528,7 +528,13 @@ class HTTP_Session
      */
     function unregister($name)
     {
-        return session_unregister($name);
+		if(isset($_SESSION[$name])){
+			unset($_SESSIN[$name]);
+			return true;
+		}
+		return false;
+
+        //return session_unregister($name);
     }
 
     /**

@@ -72,7 +72,10 @@ if(isset($_REQUEST['PHPSESSID']))
 if(isset($_REQUEST['view'])) {
     //setcookie("view",$_REQUEST['view']);
     $view = $_REQUEST["view"];
-    session_register("view");
+	if(!isset($_SESSION['view'])){
+		$_SESSION['view'] = $view;
+	}
+    //session_register("view");
 }
 	
 
@@ -677,7 +680,7 @@ if(!$skipSecurityCheck && $use_current_login)
 
 	require_once('include/utils/UserInfoUtil.php');
 	if(preg_match('/Ajax/',$action)) {
-		if($_REQUEST['ajxaction'] == 'LOADRELATEDLIST'){
+		if(isset($_REQUEST['ajxaction']) && $_REQUEST['ajxaction'] == 'LOADRELATEDLIST'){
 			$now_action = 'DetailView';
 		} else {
 			$now_action=vtlib_purify($_REQUEST['file']);

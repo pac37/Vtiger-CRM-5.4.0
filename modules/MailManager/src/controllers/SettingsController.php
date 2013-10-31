@@ -20,7 +20,6 @@ class MailManager_SettingsController extends MailManager_MainUIController {
      * @return MailManager_Response
      */
 	function process(MailManager_Request $request) {
-		
 		$response = new MailManager_Response();
 		if ('edit' == $request->getOperationArg()) {
             $model = $this->getMailBoxModel();
@@ -30,9 +29,7 @@ class MailManager_SettingsController extends MailManager_MainUIController {
 			$response->setResult( $viewer->fetch( $this->getModuleTpl( 'Settings.tpl' ) ) );
 			
 		} else if ('save' == $request->getOperationArg()) {
-			
 			$model = $this->getMailBoxModel();
-			
 			$model->setServer($request->get('_mbox_server'));
 			$model->setUsername($request->get('_mbox_user'));
 			$model->setPassword($request->get('_mbox_pwd'));
@@ -40,7 +37,7 @@ class MailManager_SettingsController extends MailManager_MainUIController {
 			$model->setSSLType($request->get('_mbox_ssltype', 'tls'));
 			$model->setCertValidate($request->get('_mbox_certvalidate', 'novalidate-cert'));
 			$model->setRefreshTimeOut($request->get('_mbox_refresh_timeout'));
-			
+				
 			$connector = $this->getConnector();
 			
 			if ($connector->isConnected()) {

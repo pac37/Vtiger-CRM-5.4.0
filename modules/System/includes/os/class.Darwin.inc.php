@@ -82,7 +82,7 @@ class sysinfo extends bsd_common {
     $results = array();
     $s = $this->grab_ioreg('IOPCIDevice');
 
-    $lines = split("\n", $s);
+    $lines = explode("\n", $s);
     for ($i = 0, $max = sizeof($lines); $i < $max; $i++) {
       $ar_buf = preg_split("/\s+/", $lines[$i], 19);
       $results[$i] = $ar_buf[0];
@@ -96,7 +96,7 @@ class sysinfo extends bsd_common {
     // ioreg | grep "Media  <class IOMedia>"
     $s = $this->grab_ioreg('IOATABlockStorageDevice'); 
 
-    $lines = split("\n", $s);
+    $lines = explode("\n", $s);
     $j = 0;
     for ($i = 0, $max = sizeof($lines); $i < $max; $i++) {
       $ar_buf = preg_split("/\/\//", $lines[$i], 19);
@@ -115,7 +115,7 @@ class sysinfo extends bsd_common {
     $results['ram'] = array();
 
     $pstat = execute_program('vm_stat'); // use darwin's vm_stat
-    $lines = split("\n", $pstat);
+    $lines = explode("\n", $pstat);
     for ($i = 0, $max = sizeof($lines); $i < $max; $i++) {
       $ar_buf = preg_split("/\s+/", $lines[$i], 19);
 
@@ -135,7 +135,7 @@ class sysinfo extends bsd_common {
     $results['ram']['percent'] = round(($results['ram']['used'] * 100) / $results['ram']['total']); 
     // need to fix the swap info...
     $pstat = execute_program('swapinfo', '-k');
-    $lines = split("\n", $pstat);
+    $lines = explode("\n", $pstat);
 
     for ($i = 0, $max = sizeof($lines); $i < $max; $i++) {
       $ar_buf = preg_split("/\s+/", $lines[$i], 6);
@@ -157,7 +157,7 @@ class sysinfo extends bsd_common {
 
   function network () {
     $netstat = execute_program('netstat', '-nbdi | cut -c1-24,42- | grep Link');
-    $lines = split("\n", $netstat);
+    $lines = explode("\n", $netstat);
     $results = array();
     for ($i = 0, $max = sizeof($lines); $i < $max; $i++) {
       $ar_buf = preg_split("/\s+/", $lines[$i]);
@@ -183,7 +183,7 @@ class sysinfo extends bsd_common {
 
   function filesystems () {
     $df = execute_program('df', '-k');
-    $mounts = split("\n", $df);
+    $mounts = explode("\n", $df);
     $fstype = array();
 
     $s = execute_program('mount');

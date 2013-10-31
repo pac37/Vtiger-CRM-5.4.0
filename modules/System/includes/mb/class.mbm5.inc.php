@@ -32,8 +32,8 @@ class mbinfo {
 
     if (!isset($this->buf_label)) {
       if ($fp = fopen('MBM5.csv', 'r')) {
-	    $this->buf_label = split(';', fgets($fp));
-        $this->buf_value = split(';', fgets($fp));
+	    $this->buf_label = explode(';', fgets($fp));
+        $this->buf_value = explode(';', fgets($fp));
         fclose($fp);
       }
     }
@@ -58,8 +58,8 @@ class mbinfo {
 
     if (!isset($this->buf_label)) {
       if ($fp = fopen('MBM5.csv', 'r')) {
-	    $this->buf_label = split(';', fgets($fp));
-        $this->buf_value = split(';', fgets($fp));
+	    $this->buf_label = explode(';', fgets($fp));
+        $this->buf_value = explode(';', fgets($fp));
         fclose($fp);
       }
     }
@@ -85,8 +85,8 @@ class mbinfo {
 
     if (!isset($this->buf_label)) {
       if ($fp = fopen('MBM5.csv', 'r')) {
-	    $this->buf_label = split(';', fgets($fp));
-        $this->buf_value = split(';', fgets($fp));
+	    $this->buf_label = explode(';', fgets($fp));
+        $this->buf_value = explode(';', fgets($fp));
         fclose($fp);
       }
     }

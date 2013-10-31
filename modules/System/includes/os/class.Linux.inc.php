@@ -95,14 +95,14 @@ class sysinfo {
   
   function uptime () {
     $buf = rfts( '/proc/uptime', 1 );
-    $ar_buf = split( ' ', $buf );
+    $ar_buf = explode( ' ', $buf );
     $result = trim( $ar_buf[0] );
 
     return $result;
   } 
 
   function users () {
-    $who = split('=', execute_program('who', '-q'));
+    $who = explode('=', execute_program('who', '-q'));
     $result = $who[1];
     return $result;
   } 
@@ -281,7 +281,7 @@ class sysinfo {
 	        	} 
 	
 	        	if ($device) {
-	          		list($key, $value) = split(': ', $buf, 2);
+	          		list($key, $value) = explode(': ', $buf, 2);
 	
 	          		if (!preg_match('/bridge/i', $key) && !preg_match('/USB/i', $key)) {
 	            		$results[] = preg_replace('/\([^\)]+\)\.$/', '', trim($value));
@@ -361,7 +361,7 @@ class sysinfo {
       foreach( $bufe as $buf ) {
         if (preg_match('/Vendor/', $buf)) {
           preg_match('/Vendor: (.*) Model: (.*) Rev: (.*)/i', $buf, $dev);
-          list($key, $value) = split(': ', $buf, 2);
+          list($key, $value) = explode(': ', $buf, 2);
           $dev_str = $value;
           $get_type = true;
           continue;
@@ -394,8 +394,8 @@ class sysinfo {
             	    $devnum += 1;
     		    $results[$devnum] = "";
         	} elseif (preg_match('/^S:/', $buf)) {
-            	    list($key, $value) = split(': ', $buf, 2);
-            	    list($key, $value2) = split('=', $value, 2);
+            	    list($key, $value) = explode(': ', $buf, 2);
+            	    list($key, $value2) = explode('=', $value, 2);
     		    if (trim($key) != "SerialNumber") {
             		$results[$devnum] .= " " . trim($value2);
             		$devstring = 0;

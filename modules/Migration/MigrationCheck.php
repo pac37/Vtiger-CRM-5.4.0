@@ -44,7 +44,7 @@ if($_REQUEST['getmysqlpath'] == 1 && $_REQUEST['server_mysql_path'] != '')
 	if(is_file($server_mysql_path."/mysqldump"))
 	{
 		$mysql_path_found = true;
-		@session_unregister('set_server_mysql_path');
+		//@session_unregister('set_server_mysql_path');
 		$_SESSION['set_server_mysql_path'] = $server_mysql_path;
 		$migration_log .='MySQL Dump file has found in ==> '.$server_mysql_path;
 	}
