@@ -43,7 +43,7 @@ done < "$confFile"
 echo "Found $((nDir+nFile)) lines: $nError errors"
 
 if [[ $nError -gt 0 ]]; then
-	echp "Please, create the required files and folders, and rerun this script."
+	echo "Please, create the required files and folders, and rerun this script."
 	exit 1
 fi
 
