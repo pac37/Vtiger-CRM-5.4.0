@@ -1012,12 +1012,32 @@ function to_html($string, $encode=true)
 	global $log,$default_charset;
 	//$log->debug("Entering to_html(".$string.",".$encode.") method ...");
 	global $toHtml;
-	$action = vtlib_purify($_REQUEST['action']);
-	$search = vtlib_purify($_REQUEST['search']);
+//	$action = vtlib_purify($_REQUEST['action']);
+//	$search = vtlib_purify($_REQUEST['search']);
+	$action = '';
+	$search = '';
+	if(isset($_REQUEST['action'])){
+		$action = vtlib_purify($_REQUEST['action']);
+	}
+	if(isset($_REQUEST['search'])){
+		$search = vtlib_purify($_REQUEST['search']);
+	}
 
 	$doconvert = false;
 
-	if($_REQUEST['module'] != 'Settings' && $_REQUEST['file'] != 'ListView' && $_REQUEST['module'] != 'Portal' && $_REQUEST['module'] != "Reports")// && $_REQUEST['module'] != 'Emails')
+//	if($_REQUEST['module'] != 'Settings' && $_REQUEST['file'] != 'ListView' && $_REQUEST['module'] != 'Portal' && $_REQUEST['module'] != "Reports")// && $_REQUEST['module'] != 'Emails')
+	$module = '';
+	$file = '';
+	if(isset($_REQUEST['module'])){
+		$module = $_REQUEST['module'];
+	}
+	if(isset($_REQUEST['file'])){
+		$file = $_REQUEST['file'];
+	}
+//	if($_REQUEST['module'] != 'Settings' && $_REQUEST['file'] != 'ListView' && $_REQUEST['module'] != 'Portal' && $_REQUEST['module'] != "Reports")// && $_REQUEST['module'] != 'Emails')
+//		$ajax_action = $_REQUEST['module'].'Ajax';
+
+	if($module != 'Settings' && $file != 'ListView' && $module != 'Portal' && $module != "Reports")// && $_REQUEST['module'] != 'Emails')
 		$ajax_action = $_REQUEST['module'].'Ajax';
 
 	if(is_string($string))
