@@ -9,6 +9,9 @@
  ********************************************************************************/
 require_once("include/database/PearDatabase.php");
 require_once("modules/Users/Users.php");
+
+// error_log("\nStart van save mailaccount settings\n"); 
+
 global $current_user;
 $displayname= vtlib_purify($_REQUEST['displayname']);
 $userid = $current_user->id;
