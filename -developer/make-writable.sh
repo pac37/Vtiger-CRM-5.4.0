@@ -13,7 +13,7 @@ apacheGroup="www-data"		# Apache group
 if [ -n "$1" ]; then
 	basePath="$1"
 else
-	echo "No base path specified: assumin $basePath"
+	echo "No base path specified: assuming $basePath"
 fi
 
 paths=()
@@ -22,6 +22,8 @@ let i=1
 let nDir=0
 let nFile=0
 let nError=0
+let nWildChar=0
+
 
 echo "This script will change the ownership of the specified files and directories to $apacheUser:$apacheGroup."
 echo "Loading list from $confFile"
@@ -34,13 +36,15 @@ do
 		((nDir++))
 	elif [ -f "$line" ]; then
 		((nFile++))
+    elif [ "${line:(-2)}" = "/*" ] && [ -d "${line:0:-2}" ]; then
+        ((nWildChar++))
 	else
 		((nError++))
 		echo "Warning: $line not found."
 	fi		 
 done < "$confFile"
 
-echo "Found $((nDir+nFile)) lines: $nError errors"
+echo "Found $((nDir+nFile+nWildChar)) lines: $nError errors"
 
 if [[ $nError -gt 0 ]]; then
 	echo "Please, create the required files and folders, and rerun this script."
