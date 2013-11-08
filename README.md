@@ -5,7 +5,8 @@ My customization of Vtiger, updated to version 5.4 and patched where needed.
 
 Contains, already applyed:
 
-- Performance & Security Patch
+- Performance & Security Patch (rev 2)
+- NuSOAP (rev. 0.9.5) 
 
 Extra files
 -----------
@@ -26,10 +27,14 @@ An Italian Language pack
 
 A bash script to change the owner of specified files and directory: by default the owner is root:root but this as to be changed into www-data:www-data to allowing Apache to write them.
 
-- `make-writable.sh <base path>` apply the changes considering <base path> as Vtiger install folder
-- `make-writable.conf` contains the files and directories to be changed, one per line (directories don't have trailng slashes)
+- `make-writable.sh <base path>` apply the changes considering <base path> as Vtiger install folder, using `make-writable.conf` as default file list
+- `make-writable.conf` the files and directories that need to be writable during the installation process, specified one per line (directories don't have trailng slashes)
+- `make-writable-lang.conf` the files and directories that need to be writable in order to import a language pack
+- `make-writable-pdfmaker` the files and directories that need to be writable in order to install PDF Maker Professional module
 
-note: non existent files or directory cause the script to stop: they have to be created manually.
+Notes 
+Non existent files or directory cause the script to stop: they have to be created manually.
+The script recongnizes the wildchar only in place of the filename.
 
 Links
 -----
