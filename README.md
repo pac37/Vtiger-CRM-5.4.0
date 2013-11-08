@@ -42,3 +42,4 @@ Links
 - [vtigercrm-5.4.0-PHPv54-v2.patch](http://trac.vtiger.com/cgi-bin/trac.cgi/attachment/ticket/7618/vtigercrm-5.4.0-PHPv54-v2.patch) 
 - [SourceForge repository](http://sourceforge.net/projects/vtigercrm/files/vtiger%20CRM%205.4.0/Core%20Product/VtigerCRM540_Security_Patch.zip/download) - for the source code the performance & security patch.
 - [Italian Language Pack](http://lucacricchio.it/blog/informatica/vtiger/download-modulo-lingua-italiana-per-vtiger-5-4)
+- [NuSOAP - SOAP Toolkit for PHP - rev 0.9.5](http://sourceforge.net/projects/nusoap/files/nusoap/0.9.5/)
