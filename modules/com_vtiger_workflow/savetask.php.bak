@@ -29,7 +29,7 @@ require_once("VTWorkflowApplication.inc");
 		if(isset($request["task_id"])){
 			$task = $tm->retrieveTask($request["task_id"]);
 		}else{
-			$taskType = vtlib_purifyForSql($request["task_type"]);
+			$taskType = $request["task_type"];
 			$workflowId = $request["workflow_id"];
 			$task = $tm->createTask($taskType, $workflowId);
 		}
@@ -59,8 +59,8 @@ require_once("VTWorkflowApplication.inc");
 		}
 		$tm->saveTask($task);
 
-		if(isset(vtlib_purify($request["return_url"]))) {
-			$returnUrl=  vtlib_purify($request["return_url"]);
+		if(isset($request["return_url"])){
+			$returnUrl=$request["return_url"];
 		}else{
 			$returnUrl=$module->editTaskUrl($task->id);
 		}
