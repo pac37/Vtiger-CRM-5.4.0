@@ -1,11 +1,23 @@
+## Apache related
+# Disable directory listing
+Options -Indexes 
+
+##PHP related
+# Vtiger general prerequisites
 php_value max_execution_time 600
 php_flag display_errors On
 
-# E_WARNING & ~E_NOTICE & ~E_DEPRECATED
+#E_WARNING & ~E_NOTICE & ~E_DEPRECATED
 php_value error_reporting 2 
 
 #php_value allow_call_time_pass_reference On - Unsupported in PHP 5.4 
 php_flag log_errors Off
+
+# Upload limits (uncomment and set to needed values)
+# note:upload size needs to be smaller than post size
+#php_value upload_max_filesize 10M
+#php_value post_max_size 18M
+
 
 # Modules ( uncomment if needed )
 # PDF Maker Professional
