@@ -8,7 +8,7 @@
  ************************************************************************************}
 <table cellpadding=0 cellspacing=0 border=0 class="small" width="98%">
 <tr>
-	<td class="txtGreen" style="padding-left: 5px;"><strong>{'LBL_Mailbox'|@getTranslatedString}</strong></td>
+	<td class="dvtSelectedCell" style="padding-left: 5px;"><strong>{'LBL_Mailbox'|@getTranslatedString}</strong></td>
 </tr>
 <tr>
 	<td style="padding-left: 5px;" class="dvtContentSpace">
