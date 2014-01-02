@@ -40,11 +40,13 @@ qq.extend(qq.UploadHandlerXhr.prototype, {
 			params['cc'] = jQuery('#_mail_replyfrm_cc_').val();
 			params['bcc'] = jQuery('#_mail_replyfrm_bcc_').val();
 			params['subject'] = jQuery('#_mail_replyfrm_subject_').val();
-			
-			var body = CKEDITOR.instances['_mail_replyfrm_body_'];
-			if(body != undefined) {
-				params['body'] =  body.getData();
-			}
+			/*
+                        var body = CKEDITOR.instances['_mail_replyfrm_body_'];
+                        if(body != undefined) {
+                                params['body'] =  body.getData();
+                        }
+        		 */
+            		params['body'] = '';
 			
 			// build query string
 			params = params || {};
@@ -164,11 +166,13 @@ qq.extend(qq.UploadHandlerForm.prototype, {
 		params['cc'] = jQuery('#_mail_replyfrm_cc_').val();
 		params['bcc'] = jQuery('#_mail_replyfrm_bcc_').val();
 		params['subject'] = jQuery('#_mail_replyfrm_subject_').val();
-		
-		var body = CKEDITOR.instances['_mail_replyfrm_body_'];
-		if(body != undefined) {
-			params['body'] =  body.getData();
-		}
+		/*
+                        var body = CKEDITOR.instances['_mail_replyfrm_body_'];
+                        if(body != undefined) {
+                                params['body'] =  body.getData();
+                        }
+            	*/
+            	params['body'] = '';
 		
         var form = this._createForm(iframe, params);
         form.appendChild(input);
